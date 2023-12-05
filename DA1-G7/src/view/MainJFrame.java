@@ -27,8 +27,7 @@ public class MainJFrame extends javax.swing.JFrame {
 
     public MainJFrame(String tenNv, String role, String idNhanvien, String pass, String user) {
         initComponents();
-        roleTaiKhoan = role;
-        lbluserNhanVien.setText(role);
+        lblRoleNhanVien.setText(role);
         idNhanVienBanHang = idNhanvien;
         lbluserNhanVien.setText(tenNv);
         matkhau = pass;
@@ -91,7 +90,7 @@ public class MainJFrame extends javax.swing.JFrame {
         pndoiMatkhau1 = new javax.swing.JPanel();
         lbThongKe2 = new javax.swing.JLabel();
         lbBanHang3 = new javax.swing.JLabel();
-        lblRoleNhanVien1 = new javax.swing.JLabel();
+        lblRoleNhanVien = new javax.swing.JLabel();
         pnLoad = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -405,12 +404,12 @@ public class MainJFrame extends javax.swing.JFrame {
         lbluserNhanVien.setFont(new java.awt.Font("Corbel", 1, 18)); // NOI18N
         lbluserNhanVien.setForeground(new java.awt.Color(255, 255, 255));
         lbluserNhanVien.setText("...");
-        pnBackgroundProfile.add(lbluserNhanVien, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 50, 160, 48));
+        pnBackgroundProfile.add(lbluserNhanVien, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 70, 160, 48));
 
         lbBanHang2.setFont(new java.awt.Font("Corbel", 1, 18)); // NOI18N
         lbBanHang2.setForeground(new java.awt.Color(255, 255, 255));
         lbBanHang2.setText("user :");
-        pnBackgroundProfile.add(lbBanHang2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 50, 50, 48));
+        pnBackgroundProfile.add(lbBanHang2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 70, 50, 48));
 
         btnhuy.setForeground(new java.awt.Color(0, 0, 0));
         btnhuy.setText("Hủy");
@@ -511,12 +510,12 @@ public class MainJFrame extends javax.swing.JFrame {
         lbBanHang3.setFont(new java.awt.Font("Corbel", 1, 18)); // NOI18N
         lbBanHang3.setForeground(new java.awt.Color(255, 255, 255));
         lbBanHang3.setText("Chức Vụ :");
-        pnBackgroundProfile.add(lbBanHang3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 10, 70, 48));
+        pnBackgroundProfile.add(lbBanHang3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 10, 90, 48));
 
-        lblRoleNhanVien1.setFont(new java.awt.Font("Corbel", 1, 18)); // NOI18N
-        lblRoleNhanVien1.setForeground(new java.awt.Color(255, 255, 255));
-        lblRoleNhanVien1.setText("...");
-        pnBackgroundProfile.add(lblRoleNhanVien1, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 10, 120, 48));
+        lblRoleNhanVien.setFont(new java.awt.Font("Corbel", 1, 18)); // NOI18N
+        lblRoleNhanVien.setForeground(new java.awt.Color(255, 255, 255));
+        lblRoleNhanVien.setText("...");
+        pnBackgroundProfile.add(lblRoleNhanVien, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 40, 210, 48));
 
         getContentPane().add(pnBackgroundProfile, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 210, 790));
 
@@ -534,11 +533,16 @@ public class MainJFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_pnBanHangMouseClicked
 
     private void pnSanPhamMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnSanPhamMouseClicked
-        setJPanel(pnLoad, new ViewSanPham(this), "Quản Lý Sản Phẩm", "product64.png");
+        if (lblRoleNhanVien.getText().equals("Quản Lí")) {
+            setJPanel(pnLoad, new ViewSanPham(this), "Quản Lý Sản Phẩm", "product64.png");
+        } else {
+            JOptionPane.showMessageDialog(this, "bạn không có quyền truy cập");
+            return;
+        }
     }//GEN-LAST:event_pnSanPhamMouseClicked
 
     private void pnNhanVienMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnNhanVienMouseClicked
-        if (lbluserNhanVien.getText().equals("Quản Lí")) {
+        if (lblRoleNhanVien.getText().equals("Quản Lí")) {
             setJPanel(pnLoad, new ViewNhanVien(), "Nhân Viên", "employee64.png");
         } else {
             JOptionPane.showMessageDialog(this, "bạn không có quyền truy cập");
@@ -552,7 +556,7 @@ public class MainJFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_pnHoaDonMouseClicked
 
     private void pnKhuyenMaiMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnKhuyenMaiMouseClicked
-        if (lbluserNhanVien.getText().equals("Quản Lí")) {
+        if (lblRoleNhanVien.getText().equals("Quản Lí")) {
             setJPanel(pnLoad, new ViewKhuyenMai(), "Khuyến Mãi", "invoice64.png");
         } else {
             JOptionPane.showMessageDialog(this, "bạn không có quyền truy cập");
@@ -561,7 +565,7 @@ public class MainJFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_pnKhuyenMaiMouseClicked
 
     private void pnKhachHangMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnKhachHangMouseClicked
-        if (lbluserNhanVien.getText().equals("Quản Lí")) {
+        if (lblRoleNhanVien.getText().equals("Quản Lí")) {
             setJPanel(pnLoad, new ViewKhachHang(), "Khách Hàng", "customer64.png");
         } else {
             JOptionPane.showMessageDialog(this, "bạn không có quyền truy cập");
@@ -654,8 +658,8 @@ public class MainJFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_pndoiMatkhau1MouseMoved
 
     private void pndoiMatkhau1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pndoiMatkhau1MouseClicked
-        var rs=JOptionPane.showConfirmDialog(this, "Bạn có chắc chắn muốn đăng xuất");
-        if (rs==0) {
+        var rs = JOptionPane.showConfirmDialog(this, "Bạn có chắc chắn muốn đăng xuất");
+        if (rs == 0) {
             System.exit(0);
         }
     }//GEN-LAST:event_pndoiMatkhau1MouseClicked
@@ -720,7 +724,7 @@ public class MainJFrame extends javax.swing.JFrame {
     private javax.swing.JLabel lbThongKe;
     private javax.swing.JLabel lbThongKe1;
     private javax.swing.JLabel lbThongKe2;
-    private javax.swing.JLabel lblRoleNhanVien1;
+    private javax.swing.JLabel lblRoleNhanVien;
     private javax.swing.JLabel lbluserNhanVien;
     private javax.swing.JPanel pnBackgroundProfile;
     private javax.swing.JPanel pnBanHang;
