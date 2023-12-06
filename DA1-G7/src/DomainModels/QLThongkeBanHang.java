@@ -11,18 +11,30 @@ package DomainModels;
 public class QLThongkeBanHang {
     private String ma;
     private String ten;
+    private String kichthuoc;
     private int soLuong;
     private Double tongTien;
 
     public QLThongkeBanHang() {
     }
 
-    public QLThongkeBanHang(String ma, String ten, int soLuong, Double tongTien) {
+    public QLThongkeBanHang(String ma, String ten, String kichthuoc, int soLuong, Double tongTien) {
         this.ma = ma;
         this.ten = ten;
+        this.kichthuoc = kichthuoc;
         this.soLuong = soLuong;
         this.tongTien = tongTien;
     }
+
+    public String getKichthuoc() {
+        return kichthuoc;
+    }
+
+    public void setKichthuoc(String kichthuoc) {
+        this.kichthuoc = kichthuoc;
+    }
+
+
 
     public String getMa() {
         return ma;
@@ -54,6 +66,11 @@ public class QLThongkeBanHang {
 
     public void setTongTien(Double tongTien) {
         this.tongTien = tongTien;
+    }
+
+    @Override
+    public String toString() {
+        return "ThongkeBanHang{" + "ma=" + ma + ", ten=" + ten + ", soLuong=" + soLuong + ", tongTien=" + tongTien + '}';
     }
     
     

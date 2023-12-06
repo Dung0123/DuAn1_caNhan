@@ -1428,19 +1428,13 @@ public class ViewKhuyenMai extends javax.swing.JPanel {
 
     private void btnttActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnttActionPerformed
         if (ckbttVoucher.isSelected()) {
-            int tt = 0;
-            Xhelp.excuteUpdate("""
-                               update Voucher set trangThai = ? where ma = ?
-                               """,  tt,this.txtMaVoucher.getText());
-            loadDataVoucher(iVoucherServise.getAllVoucherTrangThai012());
-            ckbttVoucher.setSelected(false);
-        } else {
              int tt = 1;
             Xhelp.excuteUpdate("""
                                update Voucher set trangThai = ? where ma = ?
                                """, tt,this.txtMaVoucher.getText());
             loadDataVoucher(iVoucherServise.getAllVoucherTrangThai012());
-        }
+            ckbttVoucher.setSelected(false);
+        } 
     }//GEN-LAST:event_btnttActionPerformed
 
     private void btnClear2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnClear2ActionPerformed

@@ -16,6 +16,7 @@ import DomainModels.QLThongKe;
 
 import DomainModels.QLThongKe;
 import DomainModels.QLThongkeBanHang;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import javax.swing.JOptionPane;
@@ -44,7 +45,7 @@ public class ViewThongKe extends javax.swing.JPanel {
             }
             index++;
             model.addRow(new Object[]{
-                index, hd.getMa(), hd.getTen(), hd.getSoLuong(), tt
+                index, hd.getMa(), hd.getTen(), hd.getKichThuoc(), hd.getSoLuong(), tt
             });
         }
     }
@@ -63,7 +64,7 @@ public class ViewThongKe extends javax.swing.JPanel {
             }
             index++;
             model.addRow(new Object[]{
-                index, hd.getMa(), hd.getTen(), hd.getSoLuong(), tt
+                index, hd.getMa(), hd.getTen(), hd.getKichThuoc(), hd.getSoLuong(), tt
             });
         }
     }
@@ -76,8 +77,13 @@ public class ViewThongKe extends javax.swing.JPanel {
         for (QLThongkeBanHang tk : this.serv.selectcBanHang()) {
             tongTien += tk.getTongTien();
             index++;
+            if (tk.getSoLuong() < 10) {
+                JOptionPane.showMessageDialog(this, "Sản Phẩm " + tk.getTen() + " Sắp hết");
+            } else if (tk.getSoLuong() >= 499) {
+                JOptionPane.showMessageDialog(this, "Sản Phẩm " + tk.getTen() + " đang tồn trên 499 sản phẩm");
+            }
             model.addRow(new Object[]{
-                index, tk.getMa(), tk.getTen(), tk.getSoLuong(), tk.getTongTien()
+                index, tk.getMa(), tk.getTen(), tk.getKichthuoc(), tk.getSoLuong(), tk.getTongTien()
 
             });
             System.out.println(tk.getTongTien());
@@ -95,7 +101,7 @@ public class ViewThongKe extends javax.swing.JPanel {
         scrollPaneWin116 = new custome_ui.swing.ScrollPaneWin11();
         tableKho = new rojeru_san.complementos.RSTableMetro();
         buttonGradient3 = new app.view.swing.ButtonGradient();
-        cbbtrangthaikho1 = new app.view.swing.ComboBoxSuggestion();
+        cbbtrangthaikho = new app.view.swing.ComboBoxSuggestion();
         jLabel6 = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
         jPanel5 = new javax.swing.JPanel();
@@ -127,64 +133,64 @@ public class ViewThongKe extends javax.swing.JPanel {
         tableKho.setAutoCreateRowSorter(true);
         tableKho.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null}
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null}
             },
             new String [] {
-                "STT", "Mã Sản Phẩm", "Tên Sản Phẩm", "Số Lượng", "Trạng Thái"
+                "STT", "Mã Sản Phẩm", "Tên Sản Phẩm", "Size", "Số Lượng còn lại", "Trạng Thái"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false
+                false, false, false, false, true, false
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -225,14 +231,19 @@ public class ViewThongKe extends javax.swing.JPanel {
             }
         });
 
-        cbbtrangthaikho1.setBackground(new java.awt.Color(38, 28, 73));
-        cbbtrangthaikho1.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
-        cbbtrangthaikho1.setForeground(new java.awt.Color(255, 255, 255));
-        cbbtrangthaikho1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Bán chạy", "Tồn" }));
-        cbbtrangthaikho1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        cbbtrangthaikho1.addActionListener(new java.awt.event.ActionListener() {
+        cbbtrangthaikho.setBackground(new java.awt.Color(38, 28, 73));
+        cbbtrangthaikho.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+        cbbtrangthaikho.setForeground(new java.awt.Color(255, 255, 255));
+        cbbtrangthaikho.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Bán chạy", "Tồn" }));
+        cbbtrangthaikho.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        cbbtrangthaikho.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                cbbtrangthaikhoItemStateChanged(evt);
+            }
+        });
+        cbbtrangthaikho.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cbbtrangthaikho1ActionPerformed(evt);
+                cbbtrangthaikhoActionPerformed(evt);
             }
         });
 
@@ -249,7 +260,7 @@ public class ViewThongKe extends javax.swing.JPanel {
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel6)
                     .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addComponent(cbbtrangthaikho1, javax.swing.GroupLayout.PREFERRED_SIZE, 201, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(cbbtrangthaikho, javax.swing.GroupLayout.PREFERRED_SIZE, 201, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(27, 27, 27)
                         .addComponent(buttonGradient3, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(976, Short.MAX_VALUE))
@@ -266,7 +277,7 @@ public class ViewThongKe extends javax.swing.JPanel {
                 .addComponent(jLabel6)
                 .addGap(22, 22, 22)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(cbbtrangthaikho1, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cbbtrangthaikho, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(buttonGradient3, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(721, Short.MAX_VALUE))
             .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -283,64 +294,64 @@ public class ViewThongKe extends javax.swing.JPanel {
         tableBanHang.setAutoCreateRowSorter(true);
         tableBanHang.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null}
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null}
             },
             new String [] {
-                "STT", "Mã Sản Phẩm", "Tên Sản Phẩm", "Số Lượng", "Tổng Tiền"
+                "STT", "Mã Sản Phẩm", "Tên Sản Phẩm", "Size", "Số Lượng", "Tổng Tiền"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false
+                false, false, false, true, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -439,7 +450,7 @@ public class ViewThongKe extends javax.swing.JPanel {
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel5Layout.createSequentialGroup()
                         .addComponent(lblDoanhthu, javax.swing.GroupLayout.PREFERRED_SIZE, 283, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 86, Short.MAX_VALUE)
                         .addComponent(btnLoadlai, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(195, 195, 195))
                     .addGroup(jPanel5Layout.createSequentialGroup()
@@ -456,7 +467,7 @@ public class ViewThongKe extends javax.swing.JPanel {
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jdNgaybd, javax.swing.GroupLayout.PREFERRED_SIZE, 208, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jdNgayKt, javax.swing.GroupLayout.PREFERRED_SIZE, 208, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(227, Short.MAX_VALUE))
+                .addContainerGap(231, Short.MAX_VALUE))
             .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jPanel5Layout.createSequentialGroup()
                     .addGap(5, 5, 5)
@@ -499,7 +510,7 @@ public class ViewThongKe extends javax.swing.JPanel {
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1338, Short.MAX_VALUE)
+            .addGap(0, 1346, Short.MAX_VALUE)
             .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
                     .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -523,9 +534,8 @@ public class ViewThongKe extends javax.swing.JPanel {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
                 .addComponent(tabbedPaneCustom2, javax.swing.GroupLayout.PREFERRED_SIZE, 1318, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(26, Short.MAX_VALUE))
+                .addGap(0, 32, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -539,42 +549,54 @@ public class ViewThongKe extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void tableKhoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tableKhoMouseClicked
-        // TODO add your handling code here:
+        int row = this.tableKho.getSelectedRow();
+        String ma = this.tableKho.getValueAt(row, 1).toString();
+        String s = this.tableKho.getValueAt(row, 3).toString();
+        DefaultTableModel model = (DefaultTableModel) this.tableBanHang.getModel();
+        Double tongTien = 0.0;
+        model.setRowCount(0);
+        int index = 0;
+        for (QLThongkeBanHang tk : this.serv.selectcBanHangByTimkiemMa(ma,s)) {
+            index++;
+            tongTien += tk.getTongTien();
+            Double tongtien = 0.0;
+            index++;
+            model.addRow(new Object[]{
+                index, tk.getMa(), tk.getTen(), tk.getKichthuoc(), tk.getSoLuong(), tk.getTongTien()
+            });           
+        }
+        this.lblDoanhthu.setText(String.valueOf(tongTien) + " VND");
+        this.tabbedPaneCustom2.setSelectedIndex(1);
     }//GEN-LAST:event_tableKhoMouseClicked
 
     private void buttonGradient3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonGradient3ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_buttonGradient3ActionPerformed
 
-    private void cbbtrangthaikho1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbbtrangthaikho1ActionPerformed
+    private void cbbtrangthaikhoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbbtrangthaikhoActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_cbbtrangthaikho1ActionPerformed
+    }//GEN-LAST:event_cbbtrangthaikhoActionPerformed
 
     private void tableBanHangMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tableBanHangMouseClicked
+
         // TODO add your handling code here:
     }//GEN-LAST:event_tableBanHangMouseClicked
 
     private void btnLoc1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoc1ActionPerformed
-
         DefaultTableModel model = (DefaultTableModel) this.tableBanHang.getModel();
         model.setRowCount(0);
         int index = 0;
+        Double tongtien = 0.0;
         for (QLThongkeBanHang tk : this.serv.selectcBanHangByTimkiem(this.txtTenSanPham.getText())) {
             index++;
-            Double tongtien = 0.0;
-            if (tk.getSoLuong() < 10) {
-                JOptionPane.showMessageDialog(this, "Sản Phẩm " + tk.getTen() + " Sắp hết");
-            } else if (tk.getSoLuong() >= 200) {
-                JOptionPane.showMessageDialog(this, "Sản Phẩm " + tk.getTen() + " đang tồn trên 200 sản phẩm");
-            }
-            index++;
+            tongtien += tk.getTongTien();
             model.addRow(new Object[]{
-                index, tk.getMa(), tk.getTen(), tk.getSoLuong(), tk.getTongTien()
+                index, tk.getMa(), tk.getTen(), tk.getKichthuoc(), tk.getSoLuong(), tk.getTongTien()
 
             });
 
         }
-
+        this.lblDoanhthu.setText(String.valueOf(tongtien) + " VND");
         // TODO add your handling code here:
     }//GEN-LAST:event_btnLoc1ActionPerformed
 
@@ -586,26 +608,33 @@ public class ViewThongKe extends javax.swing.JPanel {
     }//GEN-LAST:event_btnLoadlaiActionPerformed
 
     private void btnLoc2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoc2ActionPerformed
-
         int index = 0;
         Date ngaybd = this.jdNgaybd.getDate();
-        Date ngaykt = this.jdNgaybd.getDate();
+        Date ngaykt = this.jdNgayKt.getDate();
         DefaultTableModel model = (DefaultTableModel) this.tableBanHang.getModel();
         model.setRowCount(0);
         ArrayList<QLThongkeBanHang> list = this.serv.SeleccLocBanHang(ngaybd, ngaykt);
         double tongTien = 0.0;
         for (QLThongkeBanHang tk : list) {
             index++;
-            tongTien += tk.getTongTien();
+            tongTien = tongTien + tk.getTongTien();
             model.addRow(new Object[]{
-                index, tk.getMa(), tk.getTen(), tk.getSoLuong(), tk.getTongTien()
+                index, tk.getMa(), tk.getTen(), tk.getKichthuoc(), tk.getSoLuong(), tk.getTongTien()
             });
-            this.lblDoanhthu.setText(String.valueOf(tongTien) + " VND");
+        }
+        this.lblDoanhthu.setText(String.valueOf(tongTien) + " VND");
+    }//GEN-LAST:event_btnLoc2ActionPerformed
+
+    private void cbbtrangthaikhoItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cbbtrangthaikhoItemStateChanged
+        if (cbbtrangthaikho.getSelectedIndex() == 0) {
+            LoadTablekho();
+
+        } else {
+            LoadTableTon();
         }
 
-        // lọc thời gian
         // TODO add your handling code here:
-    }//GEN-LAST:event_btnLoc2ActionPerformed
+    }//GEN-LAST:event_cbbtrangthaikhoItemStateChanged
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -613,7 +642,7 @@ public class ViewThongKe extends javax.swing.JPanel {
     private app.view.swing.ButtonGradient btnLoc1;
     private app.view.swing.ButtonGradient btnLoc2;
     private app.view.swing.ButtonGradient buttonGradient3;
-    private app.view.swing.ComboBoxSuggestion cbbtrangthaikho1;
+    private app.view.swing.ComboBoxSuggestion cbbtrangthaikho;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;

@@ -28,7 +28,7 @@ public class ThongKeSerivrce implements IThongKeService {
         var lst = repo.selectAllSanPhamBanchay();
          list.clear();
         for (ThongKe tk : lst) {
-            list.add(new QLThongKe(tk.getMa(), tk.getTen(), tk.getSoLuong(), tk.getGiaBan(),
+            list.add(new QLThongKe(tk.getMa(), tk.getTen(), tk.getSoLuong(),tk.getKichThuoc(), tk.getGiaBan(),
                     tk.getTongTien(), tk.getTrangThai()));
         }
         return list;
@@ -39,7 +39,7 @@ public class ThongKeSerivrce implements IThongKeService {
         var lst = repo.selectAllSanPhamTon();
         list.clear();
         for (ThongKe tk : lst) {
-            list.add(new QLThongKe(tk.getMa(), tk.getTen(), tk.getSoLuong(), tk.getGiaBan(),
+            list.add(new QLThongKe(tk.getMa(), tk.getTen(), tk.getSoLuong(),tk.getKichThuoc(), tk.getGiaBan(),
                     tk.getTongTien(), tk.getTrangThai()));
         }
         return list;
@@ -49,8 +49,8 @@ public class ThongKeSerivrce implements IThongKeService {
     public ArrayList<QLThongkeBanHang> selectcBanHang() {
         var lst = repo.selectcBanHang();
         listBanHang.clear();
-        for (ThongkeBanHang tk : lst) {
-            listBanHang.add(new QLThongkeBanHang(tk.getMa(), tk.getTen(), tk.getSoLuong(), tk.getTongTien()));
+     for (ThongkeBanHang tk : lst) {
+            listBanHang.add(new QLThongkeBanHang(tk.getMa(), tk.getTen(),tk.getKichthuoc(), tk.getSoLuong(), tk.getTongTien()));
         }
         return listBanHang;
     }
@@ -60,7 +60,7 @@ public class ThongKeSerivrce implements IThongKeService {
         var lst = repo.SeleccLocBanHang(bd,kt);   
         listBanHang.clear();
         for (ThongkeBanHang tk : lst) {
-            listBanHang.add(new QLThongkeBanHang(tk.getMa(), tk.getTen(), tk.getSoLuong(), tk.getTongTien()));
+            listBanHang.add(new QLThongkeBanHang(tk.getMa(), tk.getTen(),tk.getKichthuoc(), tk.getSoLuong(), tk.getTongTien()));
         }
         return listBanHang;
     }
@@ -69,10 +69,18 @@ public class ThongKeSerivrce implements IThongKeService {
     public ArrayList<QLThongkeBanHang> selectcBanHangByTimkiem(String Ma) {
         var lst = repo.selectcBanHangbyten(Ma);
          listBanHang.clear();
-        for (ThongkeBanHang tk : lst) {
-            listBanHang.add(new QLThongkeBanHang(tk.getMa(), tk.getTen(), tk.getSoLuong(), tk.getTongTien()));
+     for (ThongkeBanHang tk : lst) {
+            listBanHang.add(new QLThongkeBanHang(tk.getMa(), tk.getTen(),tk.getKichthuoc(), tk.getSoLuong(), tk.getTongTien()));
         }
         return listBanHang;
     }
 
+        public ArrayList<QLThongkeBanHang> selectcBanHangByTimkiemMa(String Ma,String size) {
+        var lst = repo.selectcBanHangbyma(Ma,size);
+         listBanHang.clear();
+     for (ThongkeBanHang tk : lst) {
+            listBanHang.add(new QLThongkeBanHang(tk.getMa(), tk.getTen(),tk.getKichthuoc(), tk.getSoLuong(), tk.getTongTien()));
+        }
+        return listBanHang;
+    }
 }
