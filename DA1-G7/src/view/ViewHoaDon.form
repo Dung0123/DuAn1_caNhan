@@ -144,8 +144,8 @@
                           <EmptySpace min="-2" pref="32" max="-2" attributes="0"/>
                       </Group>
                   </Group>
-                  <Component id="tblhoadonchitiet" min="-2" pref="611" max="-2" attributes="0"/>
-                  <EmptySpace min="-2" pref="225" max="-2" attributes="0"/>
+                  <Component id="tblhoadonchitiet" min="-2" pref="256" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="580" max="-2" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>

@@ -4,7 +4,6 @@
  */
 package view;
 
-
 import service.ThongkeService.impl.ThongKeSerivrce;
 
 import javax.swing.table.DefaultTableModel;
@@ -37,7 +36,7 @@ public class ViewThongKe extends javax.swing.JPanel {
         int index = 0;
         String tt;
         for (QLThongKe hd : this.serv.selectAllSanPhamTon()) {
-           
+
             if (hd.getTrangThai() == 1) {
                 tt = "Đang bán";
             } else {
@@ -56,7 +55,7 @@ public class ViewThongKe extends javax.swing.JPanel {
         int index = 0;
         String tt;
         for (QLThongKe hd : this.serv.selectAllSanPhamBanchay()) {
-      
+
             if (hd.getTrangThai() == 1) {
                 tt = "Đang bán";
             } else {
@@ -73,7 +72,7 @@ public class ViewThongKe extends javax.swing.JPanel {
         DefaultTableModel model = (DefaultTableModel) this.tableBanHang.getModel();
         model.setRowCount(0);
         int index = 0;
-        Double tongTien= 0.0;
+        Double tongTien = 0.0;
         for (QLThongkeBanHang tk : this.serv.selectcBanHang()) {
             tongTien += tk.getTongTien();
             index++;
@@ -83,7 +82,7 @@ public class ViewThongKe extends javax.swing.JPanel {
             });
             System.out.println(tk.getTongTien());
         }
-        this.lblDoanhthu.setText(String.valueOf(tongTien)+" VND");
+        this.lblDoanhthu.setText(String.valueOf(tongTien) + " VND");
     }
 
     @SuppressWarnings("unchecked")
@@ -118,6 +117,8 @@ public class ViewThongKe extends javax.swing.JPanel {
 
         jPanel1.setBackground(new java.awt.Color(38, 28, 73));
 
+        tabbedPaneCustom2.setBackground(new java.awt.Color(38, 28, 73));
+        tabbedPaneCustom2.setForeground(new java.awt.Color(255, 255, 255));
         tabbedPaneCustom2.setSelectedColor(new java.awt.Color(51, 0, 102));
         tabbedPaneCustom2.setUnselectedColor(new java.awt.Color(51, 0, 102));
 
@@ -560,7 +561,7 @@ public class ViewThongKe extends javax.swing.JPanel {
         int index = 0;
         for (QLThongkeBanHang tk : this.serv.selectcBanHangByTimkiem(this.txtTenSanPham.getText())) {
             index++;
-            Double tongtien= 0.0;
+            Double tongtien = 0.0;
             if (tk.getSoLuong() < 10) {
                 JOptionPane.showMessageDialog(this, "Sản Phẩm " + tk.getTen() + " Sắp hết");
             } else if (tk.getSoLuong() >= 200) {
@@ -585,12 +586,13 @@ public class ViewThongKe extends javax.swing.JPanel {
     }//GEN-LAST:event_btnLoadlaiActionPerformed
 
     private void btnLoc2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoc2ActionPerformed
-        DefaultTableModel model = (DefaultTableModel) this.tableBanHang.getModel();
-        model.setRowCount(0);
+
         int index = 0;
         Date ngaybd = this.jdNgaybd.getDate();
         Date ngaykt = this.jdNgaybd.getDate();
-        ArrayList<QLThongkeBanHang> list = this.serv.SeleccLocBanHang(ngaybd,ngaykt );
+        DefaultTableModel model = (DefaultTableModel) this.tableBanHang.getModel();
+        model.setRowCount(0);
+        ArrayList<QLThongkeBanHang> list = this.serv.SeleccLocBanHang(ngaybd, ngaykt);
         double tongTien = 0.0;
         for (QLThongkeBanHang tk : list) {
             index++;
@@ -598,7 +600,7 @@ public class ViewThongKe extends javax.swing.JPanel {
             model.addRow(new Object[]{
                 index, tk.getMa(), tk.getTen(), tk.getSoLuong(), tk.getTongTien()
             });
-            this.lblDoanhthu.setText(String.valueOf(tongTien)+" VND");
+            this.lblDoanhthu.setText(String.valueOf(tongTien) + " VND");
         }
 
         // lọc thời gian

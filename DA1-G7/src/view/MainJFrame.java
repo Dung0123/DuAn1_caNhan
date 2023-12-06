@@ -1,6 +1,9 @@
 package view;
 
 import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.FlowLayout;
+import java.awt.LayoutManager;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -17,13 +20,19 @@ public class MainJFrame extends javax.swing.JFrame {
     private static final Color colorExited = new Color(51, 0, 102);
     String roleTaiKhoan;
     String idNhanVienBanHang;
+    String userNhanVienBanHang;
+    String matkhau;
+    String user;
     private ViewBanHang viewBanHang;
 
-    public MainJFrame(String role, String idNhanvien) {
+    public MainJFrame(String tenNv, String role, String idNhanvien, String pass, String user) {
         initComponents();
         roleTaiKhoan = role;
-        lblRoleNhanVien.setText(role);
+        lbluserNhanVien.setText(role);
         idNhanVienBanHang = idNhanvien;
+        lbluserNhanVien.setText(tenNv);
+        matkhau = pass;
+        user = user;
         viewBanHang = new ViewBanHang(idNhanVienBanHang);
         setJPanel(pnLoad, viewBanHang, "Bán Hàng", "sale64.png");
     }
@@ -73,12 +82,16 @@ public class MainJFrame extends javax.swing.JFrame {
         pnKhuyenMai = new javax.swing.JPanel();
         lbKhuyenMai = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
-        lblRoleNhanVien = new javax.swing.JLabel();
+        lbluserNhanVien = new javax.swing.JLabel();
         lbBanHang2 = new javax.swing.JLabel();
         btnhuy = new app.view.swing.ButtonGradient();
         pndoiMatkhau = new javax.swing.JPanel();
         lbThongKe1 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
+        pndoiMatkhau1 = new javax.swing.JPanel();
+        lbThongKe2 = new javax.swing.JLabel();
+        lbBanHang3 = new javax.swing.JLabel();
+        lblRoleNhanVien1 = new javax.swing.JLabel();
         pnLoad = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -116,8 +129,8 @@ public class MainJFrame extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jLabel2)
                 .addGap(18, 18, 18)
-                .addComponent(lbBanHang)
-                .addContainerGap(218, Short.MAX_VALUE))
+                .addComponent(lbBanHang, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(195, Short.MAX_VALUE))
         );
         pnBanHangLayout.setVerticalGroup(
             pnBanHangLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -159,8 +172,8 @@ public class MainJFrame extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jLabel3)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(lbSanPham)
-                .addContainerGap(222, Short.MAX_VALUE))
+                .addComponent(lbSanPham, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(189, Short.MAX_VALUE))
         );
         pnSanPhamLayout.setVerticalGroup(
             pnSanPhamLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -202,8 +215,8 @@ public class MainJFrame extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jLabel4)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(lbNhanVien)
-                .addContainerGap(220, Short.MAX_VALUE))
+                .addComponent(lbNhanVien, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(178, Short.MAX_VALUE))
         );
         pnNhanVienLayout.setVerticalGroup(
             pnNhanVienLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -245,8 +258,8 @@ public class MainJFrame extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jLabel7)
                 .addGap(18, 18, 18)
-                .addComponent(lbKhachHang)
-                .addContainerGap(200, Short.MAX_VALUE))
+                .addComponent(lbKhachHang, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(159, Short.MAX_VALUE))
         );
         pnKhachHangLayout.setVerticalGroup(
             pnKhachHangLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -291,8 +304,8 @@ public class MainJFrame extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jLabel8)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(lbThongKe)
-                .addContainerGap(232, Short.MAX_VALUE))
+                .addComponent(lbThongKe, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(162, Short.MAX_VALUE))
         );
         pnThongKeLayout.setVerticalGroup(
             pnThongKeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -334,8 +347,8 @@ public class MainJFrame extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jLabel5)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(lbHoaDon)
-                .addContainerGap(236, Short.MAX_VALUE))
+                .addComponent(lbHoaDon, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(197, Short.MAX_VALUE))
         );
         pnHoaDonLayout.setVerticalGroup(
             pnHoaDonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -376,8 +389,8 @@ public class MainJFrame extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jLabel6)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(lbKhuyenMai)
-                .addContainerGap(215, Short.MAX_VALUE))
+                .addComponent(lbKhuyenMai, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(166, Short.MAX_VALUE))
         );
         pnKhuyenMaiLayout.setVerticalGroup(
             pnKhuyenMaiLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -389,15 +402,15 @@ public class MainJFrame extends javax.swing.JFrame {
 
         pnBackgroundProfile.add(pnKhuyenMai, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 380, 350, 70));
 
-        lblRoleNhanVien.setFont(new java.awt.Font("Corbel", 1, 18)); // NOI18N
-        lblRoleNhanVien.setForeground(new java.awt.Color(255, 255, 255));
-        lblRoleNhanVien.setText("...");
-        pnBackgroundProfile.add(lblRoleNhanVien, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 10, -1, 48));
+        lbluserNhanVien.setFont(new java.awt.Font("Corbel", 1, 18)); // NOI18N
+        lbluserNhanVien.setForeground(new java.awt.Color(255, 255, 255));
+        lbluserNhanVien.setText("...");
+        pnBackgroundProfile.add(lbluserNhanVien, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 50, 160, 48));
 
         lbBanHang2.setFont(new java.awt.Font("Corbel", 1, 18)); // NOI18N
         lbBanHang2.setForeground(new java.awt.Color(255, 255, 255));
-        lbBanHang2.setText("user:");
-        pnBackgroundProfile.add(lbBanHang2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, -1, 48));
+        lbBanHang2.setText("user :");
+        pnBackgroundProfile.add(lbBanHang2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 50, 50, 48));
 
         btnhuy.setForeground(new java.awt.Color(0, 0, 0));
         btnhuy.setText("Hủy");
@@ -440,8 +453,8 @@ public class MainJFrame extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jLabel9)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(lbThongKe1)
-                .addContainerGap(200, Short.MAX_VALUE))
+                .addComponent(lbThongKe1, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(163, Short.MAX_VALUE))
         );
         pndoiMatkhauLayout.setVerticalGroup(
             pndoiMatkhauLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -456,6 +469,54 @@ public class MainJFrame extends javax.swing.JFrame {
         );
 
         pnBackgroundProfile.add(pndoiMatkhau, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 590, 350, 70));
+
+        pndoiMatkhau1.setBackground(new java.awt.Color(51, 0, 102));
+        pndoiMatkhau1.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseMoved(java.awt.event.MouseEvent evt) {
+                pndoiMatkhau1MouseMoved(evt);
+            }
+        });
+        pndoiMatkhau1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                pndoiMatkhau1MouseClicked(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                pndoiMatkhau1MouseExited(evt);
+            }
+        });
+
+        lbThongKe2.setFont(new java.awt.Font("Corbel", 1, 18)); // NOI18N
+        lbThongKe2.setForeground(new java.awt.Color(255, 255, 255));
+        lbThongKe2.setText("Đăng Xuất");
+
+        javax.swing.GroupLayout pndoiMatkhau1Layout = new javax.swing.GroupLayout(pndoiMatkhau1);
+        pndoiMatkhau1.setLayout(pndoiMatkhau1Layout);
+        pndoiMatkhau1Layout.setHorizontalGroup(
+            pndoiMatkhau1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pndoiMatkhau1Layout.createSequentialGroup()
+                .addGap(44, 44, 44)
+                .addComponent(lbThongKe2)
+                .addContainerGap(79, Short.MAX_VALUE))
+        );
+        pndoiMatkhau1Layout.setVerticalGroup(
+            pndoiMatkhau1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pndoiMatkhau1Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(lbThongKe2, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+        );
+
+        pnBackgroundProfile.add(pndoiMatkhau1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 740, 210, 50));
+
+        lbBanHang3.setFont(new java.awt.Font("Corbel", 1, 18)); // NOI18N
+        lbBanHang3.setForeground(new java.awt.Color(255, 255, 255));
+        lbBanHang3.setText("Chức Vụ :");
+        pnBackgroundProfile.add(lbBanHang3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 10, 70, 48));
+
+        lblRoleNhanVien1.setFont(new java.awt.Font("Corbel", 1, 18)); // NOI18N
+        lblRoleNhanVien1.setForeground(new java.awt.Color(255, 255, 255));
+        lblRoleNhanVien1.setText("...");
+        pnBackgroundProfile.add(lblRoleNhanVien1, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 10, 120, 48));
 
         getContentPane().add(pnBackgroundProfile, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 210, 790));
 
@@ -477,7 +538,7 @@ public class MainJFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_pnSanPhamMouseClicked
 
     private void pnNhanVienMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnNhanVienMouseClicked
-        if (lblRoleNhanVien.getText().equals("Quản Lí")) {
+        if (lbluserNhanVien.getText().equals("Quản Lí")) {
             setJPanel(pnLoad, new ViewNhanVien(), "Nhân Viên", "employee64.png");
         } else {
             JOptionPane.showMessageDialog(this, "bạn không có quyền truy cập");
@@ -491,7 +552,7 @@ public class MainJFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_pnHoaDonMouseClicked
 
     private void pnKhuyenMaiMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnKhuyenMaiMouseClicked
-        if (lblRoleNhanVien.getText().equals("Quản Lí")) {
+        if (lbluserNhanVien.getText().equals("Quản Lí")) {
             setJPanel(pnLoad, new ViewKhuyenMai(), "Khuyến Mãi", "invoice64.png");
         } else {
             JOptionPane.showMessageDialog(this, "bạn không có quyền truy cập");
@@ -500,7 +561,7 @@ public class MainJFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_pnKhuyenMaiMouseClicked
 
     private void pnKhachHangMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnKhachHangMouseClicked
-        if (lblRoleNhanVien.getText().equals("Quản Lí")) {
+        if (lbluserNhanVien.getText().equals("Quản Lí")) {
             setJPanel(pnLoad, new ViewKhachHang(), "Khách Hàng", "customer64.png");
         } else {
             JOptionPane.showMessageDialog(this, "bạn không có quyền truy cập");
@@ -573,20 +634,35 @@ public class MainJFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_btnhuyActionPerformed
 
     private void pndoiMatkhauMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pndoiMatkhauMouseMoved
+
         // TODO add your handling code here:
     }//GEN-LAST:event_pndoiMatkhauMouseMoved
 
     private void pndoiMatkhauMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pndoiMatkhauMouseClicked
-        String email = "";
-        String newpas = "";
-        DoiMatKhau doimatkhau = new DoiMatKhau(email, newpas);
-        doimatkhau.setVisible(true);
-        this.dispose();
+        var jpanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
+        jpanel.setPreferredSize(new Dimension(790, 1330));
+        jpanel.add(new DoiMatKhau(user, matkhau).getContentPane());
+        setJPanel(pnLoad, jpanel, "Đổi Mật Khẩu", "invoice64.png");
     }//GEN-LAST:event_pndoiMatkhauMouseClicked
 
     private void pndoiMatkhauMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pndoiMatkhauMouseExited
         // TODO add your handling code here:
     }//GEN-LAST:event_pndoiMatkhauMouseExited
+
+    private void pndoiMatkhau1MouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pndoiMatkhau1MouseMoved
+        // TODO add your handling code here:
+    }//GEN-LAST:event_pndoiMatkhau1MouseMoved
+
+    private void pndoiMatkhau1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pndoiMatkhau1MouseClicked
+        var rs=JOptionPane.showConfirmDialog(this, "Bạn có chắc chắn muốn đăng xuất");
+        if (rs==0) {
+            System.exit(0);
+        }
+    }//GEN-LAST:event_pndoiMatkhau1MouseClicked
+
+    private void pndoiMatkhau1MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pndoiMatkhau1MouseExited
+        // TODO add your handling code here:
+    }//GEN-LAST:event_pndoiMatkhau1MouseExited
 
     /**
      * @param args the command line arguments
@@ -635,6 +711,7 @@ public class MainJFrame extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel9;
     private javax.swing.JLabel lbBanHang;
     private javax.swing.JLabel lbBanHang2;
+    private javax.swing.JLabel lbBanHang3;
     private javax.swing.JLabel lbHoaDon;
     private javax.swing.JLabel lbKhachHang;
     private javax.swing.JLabel lbKhuyenMai;
@@ -642,7 +719,9 @@ public class MainJFrame extends javax.swing.JFrame {
     private javax.swing.JLabel lbSanPham;
     private javax.swing.JLabel lbThongKe;
     private javax.swing.JLabel lbThongKe1;
-    private javax.swing.JLabel lblRoleNhanVien;
+    private javax.swing.JLabel lbThongKe2;
+    private javax.swing.JLabel lblRoleNhanVien1;
+    private javax.swing.JLabel lbluserNhanVien;
     private javax.swing.JPanel pnBackgroundProfile;
     private javax.swing.JPanel pnBanHang;
     private javax.swing.JPanel pnHoaDon;
@@ -653,5 +732,6 @@ public class MainJFrame extends javax.swing.JFrame {
     private javax.swing.JPanel pnSanPham;
     private javax.swing.JPanel pnThongKe;
     private javax.swing.JPanel pndoiMatkhau;
+    private javax.swing.JPanel pndoiMatkhau1;
     // End of variables declaration//GEN-END:variables
 }

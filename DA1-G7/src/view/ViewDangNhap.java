@@ -269,8 +269,9 @@ public class ViewDangNhap extends javax.swing.JFrame {
                     if (this.serv.selectByDangNhap(user.trim()).getPassWord().equals(hashedPassword)) {
                         JOptionPane.showMessageDialog(this, "đăng Nhập thành công");
                         String role = acc.getRole();
+                        String tenNV = acc.getUserName();
                         String idNhanvien = String.valueOf(acc.getIdNV());
-                        MainJFrame framemain = new MainJFrame(role, idNhanvien);
+                        MainJFrame framemain = new MainJFrame(tenNV,role, idNhanvien, pass, user);
                         framemain.setVisible(true);
                         dispose();
                     } else {
@@ -294,8 +295,9 @@ public class ViewDangNhap extends javax.swing.JFrame {
                     if (acc.getSdt().equals(user.trim()) && acc.getPassWord().equals(hashedPassword)) {
                         JOptionPane.showMessageDialog(this, "đăng Nhập thành công");
                         String role = acc.getRole();
+                        String tenNV = acc.getUserName();
                         String idNhanvien = String.valueOf(acc.getIdNV());
-                        MainJFrame framemain = new MainJFrame(role, idNhanvien);
+                        MainJFrame framemain = new MainJFrame(tenNV,role, idNhanvien,pass,user);
                         framemain.setVisible(true);
                         dispose();
                     } else {

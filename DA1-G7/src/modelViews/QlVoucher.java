@@ -137,6 +137,8 @@ public class QlVoucher {
             return "Đang diễn ra";
         } else if (this.getTrangThai() == 2) {
             return "Sắp diễn ra ";
+        } else if (this.getTrangThai() == 3) {
+            return "Đã Xóa";
         } else {
             return "Đã kết thúc";
         }

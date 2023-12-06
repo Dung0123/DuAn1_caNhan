@@ -59,7 +59,7 @@ public class ViewNhanVien extends javax.swing.JPanel {
             if (nv.getTrangThai() == 0) {
                 tt = "Đã nghỉ";
             } else {
-                tt = "Đang đi làm";
+                tt = "Đang làm việc";
             }
             model.addRow(new Object[]{
                 nv.getId(),
@@ -250,7 +250,10 @@ public class ViewNhanVien extends javax.swing.JPanel {
         nv.setTrangThai(indextt);
         return nv;
     }
-
+    private String generateRandomMa(String ma) {
+        int randomNumber = (int) ((Math.random() * 90000) + 10000);
+        return ma + randomNumber;
+    }
     private QLNhanVien getFormnhanviencb() {
         QLNhanVien nv = new QLNhanVien();
 
@@ -262,11 +265,7 @@ public class ViewNhanVien extends javax.swing.JPanel {
         nv.setTenNv(tenNv);
 
 // Validate MaNv
-        String maNv = txtMa.getText();
-        if (maNv.isEmpty()) {
-            JOptionPane.showMessageDialog(null, "Mã nhân viên là bắt buộc. Vui lòng nhập một mã hợp lệ.");
-            return null; // Stop further processing
-        }
+        String maNv = generateRandomMa("NV");       
         nv.setMaNv(maNv);
 
 // Validate Sdt
@@ -835,26 +834,25 @@ public class ViewNhanVien extends javax.swing.JPanel {
                             .addComponent(jLabel18)
                             .addComponent(jLabel16))
                         .addGap(18, 18, 18)
-                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtPasss, javax.swing.GroupLayout.PREFERRED_SIZE, 169, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtsdtct, javax.swing.GroupLayout.PREFERRED_SIZE, 206, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(txtsdtct, javax.swing.GroupLayout.DEFAULT_SIZE, 206, Short.MAX_VALUE)
+                            .addComponent(txtPasss, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                     .addGroup(jPanel4Layout.createSequentialGroup()
                         .addGap(361, 361, 361)
                         .addComponent(btnLoadag, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel4Layout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(scrollPaneWin112, javax.swing.GroupLayout.PREFERRED_SIZE, 1263, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(206, Short.MAX_VALUE))
+                        .addComponent(scrollPaneWin112, javax.swing.GroupLayout.PREFERRED_SIZE, 1285, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(184, Short.MAX_VALUE))
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
+                .addContainerGap()
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(btnLoadag, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(btnSuact, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 17, Short.MAX_VALUE)
+                    .addComponent(btnSuact, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 58, Short.MAX_VALUE)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
                         .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -879,7 +877,7 @@ public class ViewNhanVien extends javax.swing.JPanel {
                             .addComponent(txtsdtct, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addGap(18, 18, 18)
                 .addComponent(scrollPaneWin112, javax.swing.GroupLayout.PREFERRED_SIZE, 651, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(47, 47, 47))
+                .addContainerGap())
         );
 
         tabbedPaneCustom1.addTab("Thông Tin Chi Tiết", jPanel4);
@@ -956,7 +954,7 @@ public class ViewNhanVien extends javax.swing.JPanel {
 
         int row = this.tblNhanVien.getSelectedRow();
         if (row < 0) {
-            JOptionPane.showMessageDialog(this, "chọn nhân viên đẻ xóa");
+            JOptionPane.showMessageDialog(this, "chọn nhân viên để xóa");
             return;
         }
         String ma = tblNhanVien.getValueAt(row, 1).toString();
@@ -973,7 +971,7 @@ public class ViewNhanVien extends javax.swing.JPanel {
 
     private void btnThemcb1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemcb1ActionPerformed
         this.serv.addNhanvien(this.getFormnhanviencb());
-        txtmact.setText(this.txtMa.getText());
+        txtmact.setText(this.getFormnhanviencb().getMaNv());
         txtsdtct.setText(this.txtSdtcb.getText());
         this.tabbedPaneCustom1.setSelectedIndex(1);
         JOptionPane.showMessageDialog(this, " Mời bạn tiếp tục thêm thông tin -> Sửa");
@@ -996,8 +994,11 @@ public class ViewNhanVien extends javax.swing.JPanel {
         } else {
             this.rdoNu.setSelected(true);
         }
-        if (tt.equals("Đang làm việc ")) {
+        if (tt.equals("Đang làm việc")) {
             ckbtt.setSelected(true);
+        }else {
+          ckbtt.setSelected(false);
+
         }
     }//GEN-LAST:event_tblNhanVienMouseClicked
 

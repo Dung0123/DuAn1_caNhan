@@ -24,16 +24,16 @@ public class QLtaiKhoan implements QLtaiKhoanService {
         try {
             if (userName.contains("@")) {
                 sql = """
-                   SELECT NhanVien.id as id, NhanVien.email as email, NhanVien.sdt as sdt, NhanVien.matKhau as matkhau, ChucVu.ten  as ten
-                                     FROM NhanVien 
-                                     LEFT JOIN ChucVu ON NhanVien.idChucVu = ChucVu.id 
-                                     WHERE nhanvien.email = ?;
+                   SELECT NhanVien.id as id, NhanVien.ten as tenNhanVien, NhanVien.email as email, NhanVien.sdt as sdt, NhanVien.matKhau as matkhau, ChucVu.ten  as ten
+                                                        FROM NhanVien 
+                                                        LEFT JOIN ChucVu ON NhanVien.idChucVu = ChucVu.id 
+                                                        WHERE nhanvien.email = ?;
                   """;
             } else {
                 sql = """
-                  SELECT NhanVien.id as id, NhanVien.email as email, NhanVien.sdt as sdt, NhanVien.matKhau as matkhau, ChucVu.ten  as ten
-                                                       FROM NhanVien 
-                                                       LEFT JOIN ChucVu ON NhanVien.idChucVu = ChucVu.id 
+                   SELECT NhanVien.id as id, NhanVien.ten as tenNhanVien, NhanVien.email as email, NhanVien.sdt as sdt, NhanVien.matKhau as matkhau, ChucVu.ten  as ten
+                                                                          FROM NhanVien 
+                                                                          LEFT JOIN ChucVu ON NhanVien.idChucVu = ChucVu.id 
                                                        WHERE nhanvien.sdt = ?;
                   """;
             }
@@ -43,11 +43,13 @@ public class QLtaiKhoan implements QLtaiKhoanService {
             if (rs.next()) {
                 TaiKhoan tk = new TaiKhoan();
                 int id = rs.getInt("id");
+                String tenNv = rs.getNString("tenNhanVien");
                 String email = rs.getString("email");
                 String sdt = rs.getString("sdt");
                 String matKhau = rs.getString("matKhau");
                 String ten = rs.getNString("ten");
                 tk.setIdNV(id);
+                tk.setUserName(tenNv);
                 tk.setEmail(email);
                 tk.setSdt(sdt);
                 tk.setPassWord(matKhau);

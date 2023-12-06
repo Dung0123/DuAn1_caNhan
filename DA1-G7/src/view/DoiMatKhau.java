@@ -23,7 +23,6 @@ public class DoiMatKhau extends javax.swing.JFrame {
     private QLtaiKhoanService serv = new QLtaiKhoan();
     private String email;
     private String pass;
-
     public DoiMatKhau(String email, String newpas) {
         initComponents();
         this.email = email;
@@ -50,7 +49,6 @@ public class DoiMatKhau extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
-        btnDoiMatKhau = new app.view.swing.ButtonGradient();
         jLabel6 = new javax.swing.JLabel();
         txtPassWordMoi = new javax.swing.JPasswordField();
         txtPassWordHientai = new javax.swing.JPasswordField();
@@ -58,6 +56,7 @@ public class DoiMatKhau extends javax.swing.JFrame {
         lblhienan1 = new javax.swing.JLabel();
         txtPassWordMoi2 = new javax.swing.JPasswordField();
         lblhienan2 = new javax.swing.JLabel();
+        btnDoiMatKhau = new app.view.swing.ButtonGradient();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -118,18 +117,6 @@ public class DoiMatKhau extends javax.swing.JFrame {
         jLabel1.setText("Đổi Mật Khẩu");
         jPanel2.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 10, 250, 50));
 
-        btnDoiMatKhau.setForeground(new java.awt.Color(0, 0, 0));
-        btnDoiMatKhau.setText("Đổi Mật Khẩu");
-        btnDoiMatKhau.setColor1(new java.awt.Color(255, 255, 255));
-        btnDoiMatKhau.setColor2(new java.awt.Color(102, 102, 102));
-        btnDoiMatKhau.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        btnDoiMatKhau.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnDoiMatKhauActionPerformed(evt);
-            }
-        });
-        jPanel2.add(btnDoiMatKhau, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 340, -1, -1));
-
         jLabel6.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(255, 255, 255));
         jLabel6.setText("Tài Khoản");
@@ -184,6 +171,18 @@ public class DoiMatKhau extends javax.swing.JFrame {
         });
         jPanel2.add(lblhienan2, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 250, -1, -1));
 
+        btnDoiMatKhau.setForeground(new java.awt.Color(0, 0, 0));
+        btnDoiMatKhau.setText("Đổi Mật Khẩu");
+        btnDoiMatKhau.setColor1(new java.awt.Color(255, 255, 255));
+        btnDoiMatKhau.setColor2(new java.awt.Color(102, 102, 102));
+        btnDoiMatKhau.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        btnDoiMatKhau.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDoiMatKhauActionPerformed(evt);
+            }
+        });
+        jPanel2.add(btnDoiMatKhau, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 340, -1, -1));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -224,90 +223,6 @@ public class DoiMatKhau extends javax.swing.JFrame {
         }
         return null;
     }
-    private void btnDoiMatKhauActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDoiMatKhauActionPerformed
-        String username = txtUserName.getText();
-        String password = txtPassWordHientai.getText();
-        String passwordMoi = txtPassWordMoi2.getText();
-        String hashpwinput = hashPassword(password);
-        TaiKhoan tk = new TaiKhoan();
-        if (username.equals("")) {
-            JOptionPane.showMessageDialog(this, "không để trống Tài khoản");
-            return;
-        } else if (password.equals("")) {
-            JOptionPane.showMessageDialog(this, "không để trống Mật Khẩu");
-            return;
-        }
-
-        if (username.trim().contains("@")) {
-            if (Uhelper.checkEmail(txtUserName, "Email Không đúng")) {
-                return;
-            }
-            TaiKhoan acc = serv.selectByDangNhap(username.trim());
-            if (acc != null && acc.getPassWord().equals(hashpwinput)) {
-
-                if (txtPassWordMoi.getText().equals("")) {
-                    JOptionPane.showMessageDialog(this, "không để trống Mật Khẩu Mới");
-                    return;
-                }
-                if (txtPassWordMoi2.getText().equals("")) {
-                    JOptionPane.showMessageDialog(this, "không để trống Mật Khẩu Nhập Lại");
-                    return;
-                }
-                if (txtPassWordHientai.getText().equals(txtPassWordMoi.getText())) {
-                    JOptionPane.showMessageDialog(this, "Mật Khẩu mới không Được Trùng Mật Khẩu Hiện Tại");
-                    return;
-                }
-                if (txtPassWordMoi.getText().equals(txtPassWordMoi2.getText())) {
-                    tk.setUserName(username);
-                    String haspashWord = hashPassword(passwordMoi);
-                    tk.setPassWord(haspashWord);
-                    this.serv.DoiPass(tk);
-                    txtUserName.setText("");
-                    txtPassWordHientai.setText("");
-                    txtPassWordMoi2.setText("");
-                } else {
-                    JOptionPane.showMessageDialog(this, "Mật khẩu Không trùng khớp");
-                    return;
-                }
-            } else {
-                JOptionPane.showMessageDialog(this, "Thất bại");
-                return;
-            }
-        }else{
-        TaiKhoan acc = serv.selectByDangNhap(username);
-            if (acc != null && acc.getPassWord().equals(password)) {
-
-                if (txtPassWordMoi.getText().equals("")) {
-                    JOptionPane.showMessageDialog(this, "không để trống Mật Khẩu Mới");
-                    return;
-                }
-                if (txtPassWordMoi2.getText().equals("")) {
-                    JOptionPane.showMessageDialog(this, "không để trống Mật Khẩu Nhập Lại");
-                    return;
-                }
-                if (txtPassWordHientai.getText().equals(txtPassWordMoi.getText())) {
-                    JOptionPane.showMessageDialog(this, "Mật Khẩu mới không Được Trùng Mật Khẩu Hiện Tại");
-                    return;
-                }
-                if (txtPassWordMoi.getText().equals(txtPassWordMoi2.getText())) {
-                    tk.setUserName(username);
-                    tk.setPassWord(passwordMoi);
-                    this.serv.DoiPass(tk);
-                    txtUserName.setText("");
-                    txtPassWordHientai.setText("");
-                    txtPassWordMoi2.setText("");
-                } else {
-                    JOptionPane.showMessageDialog(this, "Mật khẩu Không trùng khớp");
-                    return;
-                }
-            } else {
-                JOptionPane.showMessageDialog(this, "Thất bại");
-                return;
-            }
-        }
-
-    }//GEN-LAST:event_btnDoiMatKhauActionPerformed
-
     private void txtPassWordMoiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtPassWordMoiActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtPassWordMoiActionPerformed
@@ -348,6 +263,10 @@ public class DoiMatKhau extends javax.swing.JFrame {
         }
         // TODO add your handling code here:
     }//GEN-LAST:event_lblhienan2MouseClicked
+
+    private void btnDoiMatKhauActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDoiMatKhauActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnDoiMatKhauActionPerformed
 
     /**
      * @param args the command line arguments

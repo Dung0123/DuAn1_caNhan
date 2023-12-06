@@ -28,13 +28,13 @@ public class HoaDonRepository implements IHoaDonRepository {
             + "           HoaDonChiTiet.soLuong,HoaDonChiTiet.giaTien,HoaDonChiTiet.thanhTien,HoaDon.ngayTao\n"
             + "            from HoaDonChiTiet left join HoaDon \n"
             + "            on HoaDonChiTiet.idHoaDon = HoaDon.id INNER JOIN SanPhamChiTiet \n"
-            + "            	ON HoaDonChiTiet.idSanPhamChiTiet = SanPhamChiTiet.id inner join Voucher \n"
+            + "            	ON HoaDonChiTiet.idSanPhamChiTiet = SanPhamChiTiet.id left join Voucher \n"
             + "           on Voucher.id = HoaDon.idVoucher join SanPham on SanPham.id = SanPhamChiTiet.idSanPham where HoaDon.ngayTao BETWEEN  ? and ? ";
     final String selecLocCT = "select  HoaDon.maHoaDon as maHoaDon, SanPham.ten as tenSp,\n"
             + "           HoaDonChiTiet.soLuong,HoaDonChiTiet.giaTien,HoaDonChiTiet.thanhTien,HoaDon.ngayTao\n"
             + "            from HoaDonChiTiet left join HoaDon \n"
             + "            on HoaDonChiTiet.idHoaDon = HoaDon.id INNER JOIN SanPhamChiTiet \n"
-            + "            	ON HoaDonChiTiet.idSanPhamChiTiet = SanPhamChiTiet.id inner join Voucher \n"
+            + "            	ON HoaDonChiTiet.idSanPhamChiTiet = SanPhamChiTiet.id left join Voucher \n"
             + "           on Voucher.id = HoaDon.idVoucher join SanPham on SanPham.id = SanPhamChiTiet.idSanPham \n"
             + "		   where HoaDon.maHoaDon = ?";
     final String SELECT_BY_Supper = " SELECT \n"
@@ -73,7 +73,7 @@ public class HoaDonRepository implements IHoaDonRepository {
             + "                                  JOIN \n"
             + "                                      NhanVien ON HoaDon.idNhanVien = NhanVien.id\n"
             + "                                  LEFT JOIN \n"
-            + "                                      Voucher ON HoaDon.idVoucher = Voucher.id \n"
+            + "                                      Voucher ON HoaDon.idVoucher = Voucher.id  \n"
             + "				where HoaDon.maHoaDon = ? and HoaDon.trangThai = ?";
     final String SELECT_ALL_SQL = """
                                   SELECT 
@@ -93,14 +93,15 @@ public class HoaDonRepository implements IHoaDonRepository {
                                   JOIN 
                                       NhanVien ON HoaDon.idNhanVien = NhanVien.id
                                   LEFT JOIN 
-                                      Voucher ON HoaDon.idVoucher = Voucher.id;
+                                      Voucher ON HoaDon.idVoucher = Voucher.id
+                                  ORDER BY  HoaDon.ngayTao DESC;
                                   """;
     final String SELECT_ALL_SQLCT = """
                                     	select  HoaDon.maHoaDon as maHoaDon, SanPham.ten as tenSp,
                                                HoaDonChiTiet.soLuong,HoaDonChiTiet.giaTien,HoaDonChiTiet.thanhTien,HoaDon.ngayTao
                                                 from HoaDonChiTiet left join HoaDon 
                                                 on HoaDonChiTiet.idHoaDon = HoaDon.id INNER JOIN SanPhamChiTiet 
-                                                	ON HoaDonChiTiet.idSanPhamChiTiet = SanPhamChiTiet.id inner join Voucher 
+                                                	ON HoaDonChiTiet.idSanPhamChiTiet = SanPhamChiTiet.id left join Voucher 
                                                on Voucher.id = HoaDon.idVoucher join SanPham on SanPham.id = SanPhamChiTiet.idSanPham 
                                     """;
     private List<HoaDon> listHoaDon = new ArrayList<>();

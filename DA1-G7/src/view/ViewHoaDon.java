@@ -470,8 +470,8 @@ public class ViewHoaDon extends javax.swing.JPanel {
                                 .addGap(18, 18, 18)
                                 .addComponent(jLabel5)))
                         .addGap(32, 32, 32)))
-                .addComponent(tblhoadonchitiet, javax.swing.GroupLayout.PREFERRED_SIZE, 611, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(225, 225, 225))
+                .addComponent(tblhoadonchitiet, javax.swing.GroupLayout.PREFERRED_SIZE, 256, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(580, 580, 580))
         );
 
         add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1320, 920));
@@ -618,6 +618,7 @@ public class ViewHoaDon extends javax.swing.JPanel {
     private void xuatExcel() {
         JFileChooser pathFilExcel = new JFileChooser();
         int userSelection = pathFilExcel.showSaveDialog(null);
+        
         if (userSelection == JFileChooser.APPROVE_OPTION) {
             String filePath = pathFilExcel.getSelectedFile().getAbsolutePath();
             exportToExcel(tableHoaDon, filePath);
@@ -679,9 +680,10 @@ public class ViewHoaDon extends javax.swing.JPanel {
     }
     private void tableHoaDonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tableHoaDonMouseClicked
         int row = this.tableHoaDon.getSelectedRow();
-        String id = this.tableHoaDon.getValueAt(row, 1).toString();
-        this.timkiemHoaDonChiTiet(id);
-
+//        mã hóa đơn
+        String maHoaDon = this.tableHoaDon.getValueAt(row, 1).toString();
+        this.timkiemHoaDonChiTiet(maHoaDon);
+        
         this.tblhoadonchitiet.setSelectedIndex(1);
         // TODO add your handling code here:
     }//GEN-LAST:event_tableHoaDonMouseClicked
